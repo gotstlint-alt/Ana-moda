@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Moda | Elegância e Estilo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+        
+        :root {
+            --primary: #1a1a1a;
+            --gold: #c5a059;
+            --light: #f9f9f9;
+            --text: #333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--light); color: var(--text); }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 400; }
+
+        /* HEADER */
+        header { background: var(--primary); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; letter-spacing: 2px; color: var(--gold); cursor: pointer; user-select: none; }
+        .logo span { font-style: italic; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* HERO */
+        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 20px; }
+        .hero h2 { font-size: 48px; margin-bottom: 10px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; letter-spacing: 1px; }
+        .btn { padding: 15px 40px; background: var(--gold); color: var(--primary); text-decoration: none; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none; cursor: pointer; }
+        .btn:hover { background: #d4af37; }
+
+        /* PRODUTOS */
+        .section-title { text-align: center; font-size: 36px; margin: 60px 0 40px; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 0 40px; max-width: 1200px; margin: 0 auto; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 350px; object-fit: cover; cursor: pointer; }
+        .card-info { padding: 20px; text-align: center; }
+        .card-info h3 { font-size: 20px; margin-bottom: 10px; }
+        .card-info .price { color: var(--gold); font-size: 18px; font-weight: bold; margin-bottom: 15px; }
+        .btn-wa { display: block; padding: 12px; background: #25d366; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px; }
+
+        /* FOOTER */
+        footer { background: var(--primary); color: white; text-align: center; padding: 40px 20px; margin-top: 80px; }
+        footer p { opacity: 0.7; font-size: 14px; }
+
+        /* PAINEL ADMIN */
+        #adminBar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #ff0055; color: white; padding: 15px; text-align: center; font-weight: bold; z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
+        #adminBar button { margin-left: 15px; padding: 8px 15px; background: white; color: #ff0055; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        
+        /* Estilo visual quando tá no modo edição */
+        .edit-mode [contenteditable="true"] { border: 2px dashed #ff0055; padding: 5px; background: rgba(255,0,85,0.1); outline: none; }
+        .edit-mode img { border: 3px dashed #ff0055; }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Clicando no logo 5 vezes, abre o admin -->
+    <div class="logo" onclick="abrirAdmin()">Ana<span>Moda</span></div>
+    <nav>
+        <a href="#produtos">Coleção</a>
+        <a href="#contato">Contato</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2 contenteditable="false" id="tituloHero">Elegância que veste você</h2>
+    <p contenteditable="false" id="subHero">Confira a nova coleção exclusiva de outono/inverno.</p>
+    <a href="#produtos" class="btn">Ver Coleção</a>
+</section>
+
+<h2 class="section-title" contenteditable="false" id="tituloProdutos">Nossas Peças</h2>
+
+<section class="grid" id="produtos">
+    <!-- Produto 1 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Vestido Elegance" onclick="mudarFoto(this)">
+        <div class="card-info">
+            <h3 contenteditable="false">Vestido Elegance</h3>
+            <div class="price" contenteditable="false">R$ 189,90</div>
+            <!-- Troque o número no link abaixo pelo WhatsApp da sua vó -->
+            <a href="https://wa.me/5511999999999?text=Tenho%20interesse%20no%20Vestido%20Elegance" class="btn-wa" target="_blank">Comprar pelo WhatsApp</a>
+        </div>
+    </div>
+    <!-- Produto 2 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" alt="Conjunto Alfaiataria" onclick="mudarFoto(this)">
+        <div class="card-info">
+            <h3 contenteditable="false">Conjunto Alfaiataria</h3>
+            <div class="price" contenteditable="false">R$ 249,90</div>
+            <!-- Troque o número no link abaixo pelo WhatsApp da sua vó -->
+            <a href="https://wa.me/5511999999999?text=Tenho%20interesse%20no%20Conjunto%20Alfaiataria" class="btn-wa" target="_blank">Comprar pelo WhatsApp</a>
+        </div>
+    </div>
+    <!-- Produto 3 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop" alt="Blusa Seda" onclick="mudarFoto(this)">
+        <div class="card-info">
+            <h3 contenteditable="false">Blusa de Seda</h3>
+            <div class="price" contenteditable="false">R$ 129,90</div>
+            <!-- Troque o número no link abaixo pelo WhatsApp da sua vó -->
+            <a href="https://wa.me/5511999999999?text=Tenho%20interesse%20na%20Blusa%20de%20Seda" class="btn-wa" target="_blank">Comprar pelo WhatsApp</a>
+        </div>
+    </div>
+</section>
+
+<footer id="contato">
+    <h2>Ana Moda</h2>
+    <p>WhatsApp: (11) 99999-9999 | Instagram: @anamoda</p>
+    <p style="margin-top: 20px; font-size: 12px;">&copy; 2024 Ana Moda. Todos os direitos reservados.</p>
+</footer>
+
+<!-- A BARRA SECRETA DO ADMIN -->
+<div id="adminBar">
+    ⚠️ MODO ADMINISTRADOR ATIVO
+    <button onclick="salvarAlteracoes()">Salvar Alterações</button>
+    <button onclick="sairAdmin()">Sair</button>
+</div>
+
+<script>
+    let cliquesLogo = 0;
+    let editMode = false;
+
+    // Abre o painel se clicar 5 vezes no logo
+    function abrirAdmin() {
+        cliquesLogo++;
+        if (cliquesLogo === 5) {
+            cliquesLogo = 0;
+            let senha = prompt("Digite a senha de Administrador:");
+            if (senha === "ana123") { // SENHA AQUI
+                ativarEdicao();
+            } else {
+                alert("Senha incorreta.");
+            }
+        }
+        // 2 segundos pra clicar 5 vezes sem resetar
+        setTimeout(() => { cliquesLogo = 0; }, 2000); 
+    }
+
+    function ativarEdicao() {
+        editMode = true;
+        document.body.classList.add('edit-mode');
+        document.getElementById('adminBar').style.display = 'block';
+        
+        // Torna todos os textos editáveis (menos o footer)
+        document.querySelectorAll('h2, h3, p, .price').forEach(el => {
+            if(!el.closest('footer')) el.setAttribute('contenteditable', 'true');
+        });
+        alert("Modo de edição ativado. Clique nos textos para mudar. Clique nas fotos para trocar a URL.");
+    }
+
+    function mudarFoto(imgElement) {
+        if (!editMode) return;
+        let novaUrl = prompt("Cole a nova URL da imagem (link da foto):", imgElement.src);
+        if (novaUrl) {
+            imgElement.src = novaUrl;
+        }
+    }
+
+    function salvarAlteracoes() {
+        // Salva os textos no banco local do navegador (LocalStorage)
+        let conteudo = {
+            tituloHero: document.getElementById('tituloHero').innerHTML,
+            subHero: document.getElementById('subHero').innerHTML,
+            tituloProdutos: document.getElementById('tituloProdutos').innerHTML,
+            produtos: Array.from(document.querySelectorAll('.card-info h3')).map(h => h.innerHTML),
+            precos: Array.from(document.querySelectorAll('.card-info .price')).map(p => p.innerHTML),
+            fotos: Array.from(document.querySelectorAll('.card img')).map(img => img.src)
+        };
+        
+        localStorage.setItem('anaModaDados', JSON.stringify(conteudo));
+        alert("Alterações salvas com sucesso!");
+        sairAdmin();
+    }
+
+    function sairAdmin() {
+        editMode = false;
+        document.body.classList.remove('edit-mode');
+        document.getElementById('adminBar').style.display = 'none';
+        document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'false'));
+    }
+
+    // Carrega as alterações salvas quando a página abre
+    window.onload = function() {
+        let dadosSalvos = localStorage.getItem('anaModaDados');
+        if (dadosSalvos) {
+            let c = JSON.parse(dadosSalvos);
+            document.getElementById('tituloHero').innerHTML = c.tituloHero;
+            document.getElementById('subHero').innerHTML = c.subHero;
+            document.getElementById('tituloProdutos').innerHTML = c.tituloProdutos;
+            
+            let h3s = document.querySelectorAll('.card-info h3');
+            let prices = document.querySelectorAll('.card-info .price');
+            let imgs = document.querySelectorAll('.card img');
+            
+            for(let i=0; i<h3s.length; i++) {
+                if(c.produtos[i]) h3s[i].innerHTML = c.produtos[i];
+                if(c.precos[i]) prices[i].innerHTML = c.precos[i];
+                if(c.fotos[i]) imgs[i].src = c.fotos[i];
+            }
+        }
+    };
+</script>
+
+</body>
+</html>
